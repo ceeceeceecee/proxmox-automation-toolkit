@@ -1,0 +1,29 @@
+# Konfiguration (enthält API-Token!)
+config/settings.yaml
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+venv/
+.venv/
+
+# Logs
+*.log
+
+# Betriebssystem
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Geheime Dateien
+*.key
+*.pem
+*.secret
+
+# Generierte Reports
+*.html
+!templates/*.html

@@ -1,0 +1,19 @@
+# Proxmox Automation Toolkit — Crontab-Einträge
+# Installation: crontab -e und Einträge einfügen
+# Pfad ggf. anpassen!
+
+# === Backups ===
+# Täglich um 02:00 Uhr: Backup aller VMs/CTs
+0 2 * * * /opt/proxmox-toolkit/scripts/backup-manager.sh >> /var/log/proxmox-backup-cron.log 2>&1
+
+# === Snapshots ===
+# Sonntag 03:00: Cleanup alter Snapshots für alle VMs
+0 3 * * 0 for vmid in $(pvesh get /cluster/resources --type vm --output-format json | python3 -c "import sys,json; [print(d['vmid']) for d in json.load(sys.stdin)]"); do /opt/proxmox-toolkit/scripts/vm-snapshot.sh $vmid --cleanup-only; done >> /var/log/proxmox-snapshot-cron.log 2>&1
+
+# === Monitoring ===
+# Alle 15 Minuten: Ressourcen-Monitor
+*/15 * * * * /opt/proxmox-toolkit/scripts/resource-monitor.sh >> /var/log/proxmox-monitor-cron.log 2>&1
+
+# === Health Report ===
+# Montag 08:00: Wöchentlicher Health-Report
+0 8 * * 1 /usr/bin/python3 /opt/proxmox-toolkit/python/health_report.py --output /var/www/html/health-report.html >> /var/log/proxmox-report-cron.log 2>&1

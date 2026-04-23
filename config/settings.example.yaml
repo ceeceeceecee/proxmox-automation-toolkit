@@ -1,0 +1,43 @@
+# Proxmox Automation Toolkit — Konfiguration
+# Diese Datei kopieren als settings.yaml und anpassen!
+
+# Proxmox Verbindung
+proxmox:
+  host: "192.168.1.10"
+  port: 8006
+  api_token_id: "root@pam!automation"
+  api_token_secret: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+  verify_ssl: false  # Bei Selbstsignierten Zertifikaten
+
+# Backup-Einstellungen
+backup:
+  retention_days: 7
+  storage: "local"
+  compress: "zstd"
+  mode: "snapshot"
+
+# Monitoring-Schwellenwerte (in Prozent)
+alerts:
+  cpu_threshold: 90
+  ram_threshold: 90
+  disk_threshold: 85
+
+# E-Mail Benachrichtigung (optional)
+email:
+  enabled: false
+  smtp_host: "smtp.example.com"
+  smtp_port: 587
+  smtp_user: "alerts@example.com"
+  smtp_password: "xxxxxxxx"
+  recipient: "admin@example.com"
+
+# Telegram Benachrichtigung (optional)
+telegram:
+  enabled: false
+  bot_token: "123456:ABC-DEF..."
+  chat_id: "123456789"
+
+# Snapshot-Einstellungen
+snapshot:
+  max_snapshots: 5
+  prefix: "pre-update"
