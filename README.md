@@ -31,29 +31,35 @@ Bash & Python scripts for Proxmox VE — automate backups, VM management, monito
 
 ---
 
-## Quick Start
+## 🚀 Schnellstart
+
+### Voraussetzungen
+
+| Komponente | Version | Zweck |
+|---|---|---|
+| Proxmox VE | 7.x+ | Virtualisierungsplattform |
+| Bash | 5.0+ | Automatisierungs-Scripte |
+| Python | 3.10+ | API-Wrapper & Health-Reports |
+| pvesh CLI | — | Proxmox API-Zugriff |
+| API-Token | — | Authentifizierung |
+
+### Installation
 
 ```bash
 git clone https://github.com/ceeceeceecee/proxmox-automation-toolkit.git
 cd proxmox-automation-toolkit
 
-# Konfiguration
+# Konfiguration anpassen
 cp config/settings.example.yaml config/settings.yaml
-
-# Backup testen (Dry-Run)
-bash scripts/backup-manager.sh --dry-run
-
-# Cron-Einträge ansehen
-cat cron/crontab.example
+# API-Token und Proxmox-Host eintragen
 ```
 
-### Voraussetzungen
+### Erste Schritte
 
-- Proxmox VE 7.x+
-- Bash 5.0+
-- Python 3.10+ (für Python-Scripte)
-- `pvesh` CLI (auf dem Proxmox-Host)
-- API-Token mit entsprechenden Berechtigungen
+1. **Backup testen:** `bash scripts/backup-manager.sh --dry-run`
+2. **Ressourcen überwachen:** `bash scripts/resource-monitor.sh`
+3. **Cron einrichten:** `cat cron/crontab.example` → Einträge in `/etc/crontab` übernehmen
+4. **Python-API testen:** `python3 python/proxmox_api.py`
 
 ---
 
