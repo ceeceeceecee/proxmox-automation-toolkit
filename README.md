@@ -133,6 +133,10 @@ Siehe [docs/proxmox-api-setup.md](docs/proxmox-api-setup.md) für Details.
 
 ---
 
+
+## 👤 Autor
+
+**Cela** — Freelancer für digitale Verwaltungslösungen
 ## Lizenz
 
 [MIT](LICENSE) — frei nutzbar.
