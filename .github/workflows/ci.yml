@@ -1,0 +1,26 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: ShellCheck
+        uses: ludeeus/action-shellcheck@master
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate YAML configs
+        run: |
+          pip install pyyaml
+          python3 -c "
+import yaml, glob
+for f in glob.glob('**/*.yml') + glob.glob('**/*.yaml'):
+    yaml.safe_load(open(f))
+    print(f'{f}: valid YAML')
+"
