@@ -1,151 +1,61 @@
 # Proxmox Automation Toolkit
 
-[![Bash](https://img.shields.io/badge/bash-5.0+-4EAA25?logo=gnu-bash&logoColor=white)](https://gnu.org/software/bash/)
-[![Python](https://img.shields.io/badge/python-3.10+-green?logo=python)](https://python.org)
-[![Proxmox](https://img.shields.io/badge/proxmox-VE%207%2B-E57000)](https://proxmox.com)
-[![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
+<p align="center">
+<img src="https://raw.githubusercontent.com/ceeceeceecee/ai-document-analyzer/main/docs/coletrading-banner.svg" alt="ColeTrading" width="600">
+</p>
 
-> Bash & Python Scripts für Proxmox VE — Backups, VM-Management, Monitoring & Deployment automatisieren.
+![Bash](https://img.shields.io/badge/Bash-5.0+-4EAA25?logo=gnu-bash) ![Python](https://img.shields.io/badge/Python-3.10+-3776AB?logo=python) ![Proxmox](https://img.shields.io/badge/Proxmox-VE 7+-E57000) ![License](https://img.shields.io/badge/License-MIT-blue)
 
-Bash & Python scripts for Proxmox VE — automate backups, VM management, monitoring & deployment.
+> Automatisierungstools für Proxmox VE — Backup, Deployment, Monitoring
 
----
+## Overview
 
-## Screenshot
+Umfassendes Toolkit für Proxmox VE-Administration. Shell- und Python-Scripte für automatisierte Backups, VM/CT-Deployment, Ressourcen-Monitoring und Wartungsroutinen.
 
-![Resource Monitor](screenshots/resource-monitor.png)
-*Live-Ressourcenübersicht aller VMs/LXC: CPU, RAM, Disk, Uptime & Backup-Status auf einen Blick.*
+## Features
 
----
-
-## Script-Übersicht
-
-| Script | Sprache | Beschreibung |
-|--------|---------|-------------|
-| `scripts/backup-manager.sh` | Bash | Automatisches Backup aller VMs/CTs mit Retention |
-| `scripts/vm-snapshot.sh` | Bash | Snapshot vor Updates erstellen |
-| `scripts/resource-monitor.sh` | Bash | CPU/RAM/Disk-Überwachung aller VMs |
-| `python/proxmox_api.py` | Python | API-Wrapper-Klasse für Proxmox |
-| `python/deploy_ct.py` | Python | LXC Container automatisiert deployen |
-| `python/health_report.py` | Python | Wöchentlicher HTML-Health-Report |
-
----
-
-## 🚀 Schnellstart
-
-### Voraussetzungen
-
-| Komponente | Version | Zweck |
-|---|---|---|
-| Proxmox VE | 7.x+ | Virtualisierungsplattform |
-| Bash | 5.0+ | Automatisierungs-Scripte |
-| Python | 3.10+ | API-Wrapper & Health-Reports |
-| pvesh CLI | — | Proxmox API-Zugriff |
-| API-Token | — | Authentifizierung |
-
-### Installation
-
-```bash
-git clone https://github.com/ceeceeceecee/proxmox-automation-toolkit.git
-cd proxmox-automation-toolkit
-
-# Konfiguration anpassen
-cp config/settings.example.yaml config/settings.yaml
-# API-Token und Proxmox-Host eintragen
-```
-
-### Erste Schritte
-
-1. **Backup testen:** `bash scripts/backup-manager.sh --dry-run`
-2. **Ressourcen überwachen:** `bash scripts/resource-monitor.sh`
-3. **Cron einrichten:** `cat cron/crontab.example` → Einträge in `/etc/crontab` übernehmen
-4. **Python-API testen:** `python3 python/proxmox_api.py`
-
----
-
-## Architektur
-
-```
-+-------------------+     +------------------+     +------------------+
-|   Cron / systemd  | --> |  Bash Scripts    | --> |  Proxmox VE API  |
-+-------------------+     +------------------+     +------------------+
-                                  |
-                                  v
-                          +------------------+
-                          | Python Scripts    |
-                          | (pvesh / API)     |
-                          +------------------+
-                                  |
-                                  v
-                          +------------------+
-                          | Benachrichtigung  |
-                          | (Mail / Telegram) |
-                          +------------------+
-```
-
----
-
-## Sicherheitshinweise
-
-**API-Token statt Passwort!**
-
-1. Proxmox Web-UI → Datacenter → Permissions → API Tokens
-2. Neuen Token mit minimalen Berechtigungen erstellen
-3. Token in `config/settings.yaml` eintragen
-4. **Niemals** Root-Passwort in Skripten speichern
-
-Siehe [docs/proxmox-api-setup.md](docs/proxmox-api-setup.md) für Details.
-
----
-
-## Use Cases
-
-| Zielgruppe | Szenario |
-|------------|----------|
-| Homelab | Backups & Updates automatisieren |
-| KMU | Server-Überwachung ohne Monitoring-Stack |
-| Systemadministrator | LXC-Deployment standardisieren |
-| MSP | Multi-Node Health-Reports |
-
----
+- Automatisierte Backup-Routinen
+- VM/CT Deployment-Vorlagen
+- Ressourcen-Monitoring
+- Cronjob-Verwaltung
+- Cluster-Management
+- E-Mail-Benachrichtigungen
 
 ## Tech Stack
 
-- **Bash** — System-Administration
-- **Python** — API-Wrapper & Reports
-- **Proxmox VE API** — pvesh & REST API
-- **Cron** — Zeitgesteuerte Ausführung
+| Tech | Zweck |
+|------|-------|
+| Bash 5.0+ | Scripting |
+| Python 3.10+ | Erweiterte Tools |
+| Proxmox VE API | Virtualisierung |
+| Cron | Automatisierung |
 
----
+## Quick Start
 
-## Roadmap
+```bash
+# Bash-Scripte direkt ausfuehren
+bash scripts/backup.sh
 
-- [ ] Web-Dashboard für Health-Reports
-- [ ] Multi-Node Support
-- [ ] Ansible-Integration
-- [ ] Grafana Dashboard Templates
+# Python-Tools
+cd python && pip install -r requirements.txt
+```
+
+## Screenshots
+
+**Ressourcen-Monitoring Dashboard**
+
+<img src="screenshots/resource-monitor.png" alt="Ressourcen-Monitoring Dashboard" width="800">
 
 ---
 
 ## Contributing
 
-1. Fork → Feature-Branch → Commit → Push → Pull Request
+Beiträge sind willkommen! Bitte erstelle einen Issue oder Pull Request.
 
----
+## License
 
+MIT License — siehe [LICENSE](LICENSE).
 
-## 👤 Autor
-
-**Cela** — Freelancer für digitale Verwaltungslösungen
-## Lizenz
-
-[MIT](LICENSE) — frei nutzbar.
-
-## Author
-
-[ceeceeceecee](https://github.com/ceeceeceecee)
-
-## Weitere Projekte
-
-- [Self-Hosted AI Chatbot](https://github.com/ceeceeceecee/self-hosted-ai-chatbot) — Auf Proxmox deployen
-- [n8n Business Automation](https://github.com/ceeceeceecee/n8n-business-automation) — Als VM betreiben
+<p align="center">
+<a href="https://github.com/ceeceeceecee">ColeTrading</a> &bull; DSGVO-konform &bull; Self-Hosted &bull; Open Source
+</p>
