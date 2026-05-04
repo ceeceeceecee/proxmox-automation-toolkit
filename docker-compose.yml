@@ -1,0 +1,24 @@
+services:
+  ollama:
+    image: ollama/ollama:latest
+    container_name: proxmox-automation-toolkit-ollama
+    volumes:
+      - ollama_data:/root/.ollama
+    ports:
+      - "11446:11434"
+    restart: unless-stopped
+
+  app:
+    build: .
+    ports:
+      - "8513:8501"
+    environment:
+      - OLLAMA_HOST=http://ollama:11434
+    volumes:
+      - ./data:/app/data
+    depends_on:
+      - ollama
+    restart: unless-stopped
+
+volumes:
+  ollama_data:
